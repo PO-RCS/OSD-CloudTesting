@@ -4,10 +4,11 @@ Write-Host "===================== Main Menu =======================" -Foreground
 Write-Host "================ Loading Custom Menu ==================" -ForegroundColor Yellow
 Write-Host "==================== Phil was here ====================" -ForegroundColor Yellow
 Write-Host "=======================================================" -ForegroundColor Yellow
-Write-Host "1: Zero-Touch Win10 21H1 | English | Enterprise"-ForegroundColor Yellow
-Write-Host "2: Zero-Touch Win10 20H2 | English | Enterprise" -ForegroundColor Yellow
-Write-Host "3: I'll select it myself"-ForegroundColor Yellow
-Write-Host "4: Exit`n"-ForegroundColor Yellow
+Write-Host "1: Client 1"-ForegroundColor Yellow
+Write-Host "2: Client 2" -ForegroundColor Yellow
+Write-Host "3: Client 3" -ForegroundColor Yellow
+Write-Host "4: Default Image"-ForegroundColor Yellow
+Write-Host "5: Exit`n"-ForegroundColor Yellow
 $input = Read-Host "Please make a selection"
 
 Write-Host  -ForegroundColor Yellow "Loading OSDCloud..."
