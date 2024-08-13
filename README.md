@@ -6,3 +6,9 @@ OSD-Sandbox.ps1
 
 OSD-Starter.ps1
 - Smaller hydration pack for target device, allows for custom imaging to a file location we specify in the script
+
+Wifi Answer File.ps1
+- Creates XML file with wifi details to connect in WinPE
+
+WinPE Wifi Pack.ps1
+- hydration pack for wifi function during WinPE
