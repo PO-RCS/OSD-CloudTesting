@@ -1,0 +1,2 @@
+﻿start /min powershell.exe 'C:\Users\Administrator\Documents\GitHub\OSD-CloudTesting\Wifi Answer File.ps1'
+start /min powershell.exe 'C:\Users\Administrator\Documents\GitHub\OSD-CloudTesting\WinPE Wifi Pack.ps1'
