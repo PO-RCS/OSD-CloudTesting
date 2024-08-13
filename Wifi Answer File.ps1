@@ -1,6 +1,6 @@
-﻿$profilefile = "ACprofile.xml"
-$SSID = "WifiNetwork"
-$PW = "Password1234"
+﻿$profilefile = "RCSBuild.xml"
+$SSID = "RCS-Build"
+$PW = "updateticketnotes"
 
 function Get-ScriptPath()
 {

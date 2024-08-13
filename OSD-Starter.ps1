@@ -1,8 +1,7 @@
-﻿#OSDCloud creator tool
-# OSDCloud module created by David Segura
+﻿# OSDCloud module created by David Segura
 # https://osdcloud.osdeploy.com/get-started
-# 
 # This mini script written by Brooks Peppin
+# Updated some of the commands to work with currect version of OSD
 #--------------------------------------------
 #----------------Pre-Reqs--------------------
 #--------------------------------------------
@@ -17,8 +16,6 @@ param (
     $CustomURL,
     [switch]$BuildUSB
 )
-
-
 
 #Install Win10 ADK and WinPE ADK
 If($ADK){
@@ -40,25 +37,25 @@ if($New){
     Install-Module OSD -Force
     
     Write-Host "Setting up OSDCloud template..."
-    New-OSDCloud.template -Verbose
+    New-OSDCloudTemplate -Verbose
 
 }
 if($workspace){
 
-    New-OSDCloud.workspace -WorkspacePath $workspace
+    New-OSDCloudWorkspace -WorkspacePath $workspace
 }
 
 if ($WinPEDrivers) {
-    Edit-OSDCloud.winpe -CloudDriver $WinPEDrivers
+    Edit-OSDCloudWinPE -CloudDriver $WinPEDrivers
 }
 
 if($CustomURL){
-    Edit-OSDCloud.winpe -WebPSScript $CustomURL 
+    Edit-OSDCloudWinPE -WebPSScript $CustomURL 
 }
 if($BuildISO){
-    New-OSDCloud.iso
+    New-OSDCloudISO
 }
 
 if($BuildUSB){
-    New-OSDCloud.usb
+    New-OSDCloudUSB
 }

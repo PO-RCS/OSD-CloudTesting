@@ -1,35 +1,14 @@
-﻿<#PSScriptInfo
-.VERSION 23.6.10.1
-.GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
-.AUTHOR David Segura @SeguraOSD
-.COMPANYNAME osdcloud.com
-.COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
-.TAGS OSDeploy OSDCloud WinPE OOBE Windows AutoPilot
-.LICENSEURI 
-.PROJECTURI https://github.com/OSDeploy/OSD
-.ICONURI 
-.EXTERNALMODULEDEPENDENCIES 
-.REQUIREDSCRIPTS 
-.EXTERNALSCRIPTDEPENDENCIES 
-.RELEASENOTES
-Script should be executed in a Command Prompt using the following command
-powershell Invoke-Expression -Command (Invoke-RestMethod -Uri sandbox.osdcloud.com)
-This is abbreviated as
-powershell iex (irm sandbox.osdcloud.com)
-#>
+﻿# PSScriptInfo
+# VERSION 23.6.10.1
+# GUID 9670c013-d1b1-4f5d-9bd0-0fa185b9f203
+# AUTHOR David Segura @SeguraOSD
+# COMPANYNAME osdcloud.com
+# COPYRIGHT (c) 2023 David Segura osdcloud.com. All rights reserved.
+# PROJECTURI https://github.com/OSDeploy/OSD
+# powershell iex (irm sandbox.osdcloud.com)
+
 #Requires -RunAsAdministrator
-<#
-.SYNOPSIS
-    PowerShell Script which supports the OSDCloud environment
-.DESCRIPTION
-    PowerShell Script which supports the OSDCloud environment
-.NOTES
-    Version 23.6.10.1
-.LINK
-    https://raw.githubusercontent.com/OSDeploy/OSD/master/cloud/sandbox.osdcloud.com.ps1
-.EXAMPLE
-    powershell iex (irm sandbox.osdcloud.com)
-#>
+
 [CmdletBinding()]
 param()
 $ScriptName = 'sandbox.osdcloud.com'

@@ -1,10 +1,11 @@
-﻿Write-Host  -ForegroundColor Yellow "Starting Brooks' Custom OSDCloud ..."
+﻿#Currently this isn't displaying correctly within WinPE, on trying to open RAW URL. It's credential blocking.
+Write-Host  -ForegroundColor Yellow "Starting Brooks' Custom OSDCloud ..."
 cls
 Write-Host "===================== Main Menu =======================" -ForegroundColor Yellow
 Write-Host "================ Loading Custom Menu ==================" -ForegroundColor Yellow
 Write-Host "==================== Phil was here ====================" -ForegroundColor Yellow
 Write-Host "=======================================================" -ForegroundColor Yellow
-Write-Host "1: Client 1"-ForegroundColor Yellow
+Write-Host "1: Client 1" -ForegroundColor Yellow
 Write-Host "2: Client 2" -ForegroundColor Yellow
 Write-Host "3: Client 3" -ForegroundColor Yellow
 Write-Host "4: Default Image"-ForegroundColor Yellow
@@ -16,6 +17,7 @@ Write-Host  -ForegroundColor Yellow "Loading OSDCloud..."
 Import-Module OSD -Force
 Install-Module OSD -Force
 
+# Need to modify below output to instead point to custom ISO files per client for in house imaging
 switch ($input)
 {
     '1' { Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Enterprise -ZTI } 
