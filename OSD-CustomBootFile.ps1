@@ -1,10 +1,6 @@
 ﻿#Currently this isn't displaying correctly within WinPE, on trying to open RAW URL. It's credential blocking.
-Write-Host  -ForegroundColor Yellow "Starting Brooks' Custom OSDCloud ..."
 cls
 Write-Host "===================== Main Menu =======================" -ForegroundColor Yellow
-Write-Host "================ Loading Custom Menu ==================" -ForegroundColor Yellow
-Write-Host "==================== Phil was here ====================" -ForegroundColor Yellow
-Write-Host "=======================================================" -ForegroundColor Yellow
 Write-Host "1: Client 1" -ForegroundColor Yellow
 Write-Host "2: Client 2" -ForegroundColor Yellow
 Write-Host "3: Client 3" -ForegroundColor Yellow
