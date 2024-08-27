@@ -11,4 +11,7 @@ Wifi Answer File.ps1
 - Creates XML file with wifi details to connect in WinPE
 
 WinPE Wifi Pack.ps1
-- hydration pack for wifi function during WinPE
+- Hydration pack for wifi function during WinPE
+
+WinPE Wifi Pack 2.0.ps1 
+- Optimized version of the original script
