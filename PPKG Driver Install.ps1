@@ -13,7 +13,6 @@ try {
 
 if ($SearchResult.Updates.Count -eq 0) {
     Write-Host('No Windows/Driver found') -ForegroundColor Green
-    return
     }
 
     $Updates = $SearchResult.Updates
@@ -35,7 +34,6 @@ try {
     $Downloader.Download()
     } catch {
     Write-Host("Error downloading drivers: $_") -ForegroundColor Red
-    return
 }
 
     # Check if the Drivers are all downloaded and trigger the Installation
@@ -114,7 +112,7 @@ Write-Output "Detected Brand: $brand"
 switch ($brand) {
     "Dell" {
         # Installs DriverPackFromDell
-        Write-Output "Running Dell-specific actions..." -ForegroundColor Green 
+        Write-Output "Running Dell-specific actions..." 
         Install-Script -Name Get-DriversPackFromDell
         .\Get-DriverPackFromDell.ps1 -models $productName
     }
@@ -131,7 +129,7 @@ switch ($brand) {
         Write-Output "Fetching HP drivers..."
         Get-HPDrivers -NoPrompt
         Write-Progress -PercentComplete $progress -Status "Complete" -CurrentOperation "All steps completed"
-        Write-Output "Listing All Installed Drivers..." -ForegroundColor Green 
+        Write-Output "Listing All Installed Drivers..." 
             $drivers = Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion, Manufacturer
             $drivers | ForEach-Object {
         Write-Output "Device Name: $($_.DeviceName)"
@@ -159,10 +157,7 @@ switch ($brand) {
             $progress = [math]::Round(($progress + 100 / $totalSteps), 0)
         Write-Progress -PercentComplete $progress -Status "Complete" -CurrentOperation "All steps completed" -Activity "Update"
         return
-    }
-    "ASUS" {
-        # Requires work!
-        Write-Output "This step hasn't been set up yet..."
+
     }
     "Acer" {
         # Requires work!
