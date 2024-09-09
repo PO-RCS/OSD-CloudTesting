@@ -3,8 +3,7 @@ $Destination = "$(Get-OSDCloudWorkspace)\Media\OSDCloud\OS"
 New-Item -Path $Destination -ItemType Directory -Force
 Copy-Item -Path $WindowsImage -Destination "$Destination\CustomImage.wim" -Force
 New-OSDCloudISO
-
-Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloudGUI -CloudDriver * 
+Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloudGUI -CloudDriver * -PSModuleCopy OSD,choco -Brand 'Rivercity OSD'
 
 #Cleanup OSDCloud Workspace Media
 $KeepTheseDirs = @('boot','efi','en-us','sources','fonts','resources')

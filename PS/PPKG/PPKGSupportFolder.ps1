@@ -1,0 +1,1 @@
+﻿New-Item -Path "C:\Support" -ItemType Directory
