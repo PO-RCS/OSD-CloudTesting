@@ -18,7 +18,10 @@ $applications = @(
     "adobecreativecloud",
     "adobeeader",
     "microsoft-teams-new-bootstrapper",
-    "office365business"
+    "office365business",
+    "msvisualcpluplu2008",
+    "msvisualcpluplu2010",
+    "msvisualcpluplu2012"
 )
 # Define results 
 $results =@{}
