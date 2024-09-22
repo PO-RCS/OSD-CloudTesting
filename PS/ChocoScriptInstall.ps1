@@ -8,6 +8,7 @@ if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
 }
 
 # Define the list of applications to install
+## Need to include additional application support, as well as installer stubs for TL, Automate, Huntress and SentinelOne
 $applications = @(
     "vlc",
     "googlechrome",
@@ -23,10 +24,9 @@ $applications = @(
     "msvisualcpluplu2010",
     "msvisualcpluplu2012"
 )
-# Define results 
-$results =@{}
 
 # Install each application and capture the result
+$results =@{}
 foreach ($app in $applications) {
     Write-Output "Installing $app..."
     try {
