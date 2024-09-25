@@ -10,6 +10,16 @@
 ## Still requires work
 ### Self note, get wifi intergration working on either WinPE or WinRE. We need to be able to deploy majority of the images over a single GUI. OSD Cloud won't be able to store the images locally since we're aiming for a Cloud solution
 
+##What does this script do?
+#Install required modules, scripts, update powershell, change execution policy
+#Change hibernation settings for easier deployment
+#Creates Support folder in C:/
+#Start Windows updates 
+#Start Driver updates (specifies from HP and Lenovo)
+#Uninstalls HP Bloatware
+#Installs Standard applications via Chocolately
+#Uninstalls built-in mail app
+#Removes Brand Wallpapers for HP and Lenovo
 
 winget install --id Microsoft.Powershell --source winget
 Install-PackageProvider NuGet -Force
@@ -394,3 +404,10 @@ foreach ($app in $results.Keys) {
     Write-Output "`n$app Installation Result:`n"
     Write-Output $results[$app]
 }
+
+#Uninstalls built-in mail app
+get-appxpackage *microsoft.windowscommunicationsapps* -AllUsers | remove-appxpackage -AllUsers
+
+#Removes Wallpapers 
+Remove-Item "C:\Windows\Web\Wallpaper\HP" -recurse -force;
+Remove-Item "C:\Windows\Web\Wallpaper\Lenovo" -recurse -force

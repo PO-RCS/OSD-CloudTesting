@@ -17,10 +17,12 @@ $applications = @(
     "zoom",
     "zoom-outlook",
     "adobecreativecloud",
-    "adobeeader",
+    "adobereader",
     "microsoft-teams-new-bootstrapper",
     "office365business",
     "msvisualcpluplu2008",
+    "logioptionsplus",
+    "teamviewer"
     "msvisualcpluplu2010",
     "msvisualcpluplu2012"
 )

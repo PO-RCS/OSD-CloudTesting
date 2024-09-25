@@ -3,7 +3,9 @@ $Destination = "$(Get-OSDCloudWorkspace)\Media\OSDCloud\OS"
 New-Item -Path $Destination -ItemType Directory -Force
 Copy-Item -Path $WindowsImage -Destination "$Destination\CustomImage.wim" -Force
 New-OSDCloudISOi
-Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloud '-OSBuild 22H2 -OSEdition Enterprise -OSLanguage en-us -OSActivation Retail' -Brand 'Rvercity OSD' -CloudDriver HP -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers
+
+Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloud "-OSBuild 22H2 -OSEdition Enterprise -OSLanguage en-us -OSActivation Retail" -CloudDriver * -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers
+Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloudGUI -Brand 'Rvercity OSD' -CloudDriver * -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers
 
 #Cleanup OSDCloud Workspace Media
 $KeepTheseDirs = @('boot','efi','en-us','sources','fonts','resources')
