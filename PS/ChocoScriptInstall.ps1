@@ -13,18 +13,18 @@ $applications = @(
     "vlc",
     "googlechrome",
     "firefox",
+    "notepadplusplus",
     "7zip",
     "zoom",
     "zoom-outlook",
     "adobecreativecloud",
-    "adobereader",
     "microsoft-teams-new-bootstrapper",
-    "office365business",
-    "msvisualcpluplu2008",
     "logioptionsplus",
-    "teamviewer"
-    "msvisualcpluplu2010",
-    "msvisualcpluplu2012"
+    "teamviewer",
+    "msvisualcplusplus2008-redist",
+    "msvisualcplusplus2010-redist",
+    "msvisualcplusplus2012-redist",
+    "vcredist140"
 )
 
 # Install each application and capture the result

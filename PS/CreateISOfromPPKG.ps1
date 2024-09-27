@@ -98,10 +98,10 @@ public class ISOFile
 } 
 
 #Directory to export PPKG ISO
-$dirWithPPKG = "C:\Users\Administrator\Desktop\ImmyAgentInstaller.ppkg"
+$dirWithPPKG = "C:\Users\Administrator\Documents\Windows Imaging and Configuration Designer (WICD)\OSD Immy\OSD + Immy.ppkg"
 #Directory with PPKG File
 $pathForIso = "C:\Users\Administrator\Desktop\OSD-CloudTesting\"
 #Export ISO Name
-$exportFileName = "ImmyPPKG"
+$exportFileName = "OSDImmy 1.3"
 
 dir $dirWithPPKG *.ppkg  | New-IsoFile -Path $pathForIso$exportFileName.ISO -Force

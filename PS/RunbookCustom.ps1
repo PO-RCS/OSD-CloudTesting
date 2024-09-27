@@ -2,28 +2,28 @@
 $Destination = "$(Get-OSDCloudWorkspace)\Media\OSDCloud\OS"
 New-Item -Path $Destination -ItemType Directory -Force
 Copy-Item -Path $WindowsImage -Destination "$Destination\CustomImage.wim" -Force
-New-OSDCloudISOi
+New-OSDCloudISO
 
-Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloud "-OSBuild 22H2 -OSEdition Enterprise -OSLanguage en-us -OSActivation Retail" -CloudDriver * -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers
+Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloud "-OSBuild 22H2 -OSEdition Enterprise -OSLanguage en-us -OSActivation Retail" -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -CloudDriver * -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers -Add7Zip -StartPSCommand "D:\WifiPack.ps1"
 Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloudGUI -Brand 'Rvercity OSD' -CloudDriver * -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect -DriverPath C:\ProgramData\OSDCloud\WifiDrivers
 
 #Cleanup OSDCloud Workspace Media
 $KeepTheseDirs = @('boot','efi','en-us','sources','fonts','resources')
-Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\Perfect Image\Media' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
-Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\Perfect Image\Media\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
-Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\Perfect Image\Media\EFI\Microsoft\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\WinRE\Media' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\WinRE\Media\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
+Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\WinRE\Media\EFI\Microsoft\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
 
 NEW-OSDCloudTemplate -WinRE -Name 'WinRE'
 Edit-OSDCloudWinPE -Wallpaper C:\Users\Administrator\Desktop\OSD-CloudTesting\RCSLogo.jpg -StartOSDCloud '-OSVersion Windows 10 -OSBuild 22H2 -OSEdition Enterprise -OSLanguage en-us -OSActivation Retail' -Brand 'Rvercity OSD' -CloudDriver HP -WifiProfile C:\WiFiProfiles\Wi-Fi-RCS-Guest.xml -WirelessConnect 
 New-OSDCloudTemplate -Name 'Perfect Image'
 
 Set-OSDCloudWorkspace -WorkspacePath 'C:\ProgramData\OSDCloud\Templates\Generic'
-Set-OSDCloudWorkspace -WorkspacePath 'C:\ProgramData\OSDCloud\Templates\WinRE Testing'
+Set-OSDCloudWorkspace -WorkspacePath 'C:\ProgramData\OSDCloud\Templates\WinRE'
 
 Get-OSDCloudTemplateNames
 
 Set-OSDCloudTemplate -Name 'Generic'
-Set-OSDCloudTemplate -Name 'WinRE Testing'
+Set-OSDCloudTemplate -Name 'WinRE'
 
 Get-WiFiActiveProfileSSID
 Get-WifiProfileKey RCS-Guest
