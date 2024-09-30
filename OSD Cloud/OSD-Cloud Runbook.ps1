@@ -37,9 +37,14 @@ $(Get-OSDCloudWorkspace)\Media\OSDCloud\Automate
 Get-Module -ListAvailable
 Microsoft.Powershell.Archive,Microsoft.Powershell.Dianostics,Microsoft.Powershell.Host,Microsoft.Powershell.LocalAccounts,Microsoft.Powershell.Management,Microsoft.Powershell.ODataUtils,Microsoft.Powershell.Security,Microsoft.Powershell.Utility
 
-dism /mount-image /imagefile:C:\winre\boot.wim /index:1 /mountdir:C:\winre\mount
+dism /mount-image /imagefile:C:\ProgramData\OSDCloud\Templates\WinRE\Media\sources\boot.wim /index:1 /mountdir:C:\mount
+dism /Image:C:\Mount /Get-features
+dism /Get-Packages /Image:C:\mount
+DISM /Online /Image:"C:\mount" /Enable-Feature /FeatureName:NetFx3 /All 
+
+
 dism /image:C:\winre\mount /add-package /packagepath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-WMI_en-us.cab"
 xcopy C:\Windows\System32\WindowsPowerShell\v1.0\* C:\winre\mount\Windows\System32\WindowsPowerShell\v1.0 /s /e
-dism /Unmount-Wim /MountDir:C:\winre\mount /Commit
-
+dism /Unmount-Wim /MountDir:C:\mount /Commit
+C:\ProgramData\OSDCloud\Templates\WinRE\Media\sources
 Mount-DiskImage -imagepath "C:\ProgramData\OSDCloud\Templates\WinRE Testing\OSDCloud_NoPrompt.iso"
