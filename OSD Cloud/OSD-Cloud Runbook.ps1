@@ -41,8 +41,15 @@ dism /mount-image /imagefile:C:\ProgramData\OSDCloud\Templates\WinRE\Media\sourc
 dism /Image:C:\Mount /Get-features
 dism /Get-Packages /Image:C:\mount
 DISM /Online /Image:"C:\mount" /Enable-Feature /FeatureName:NetFx3 /All 
+DISM /Image:C:\Mount\install.wim /Add-Driver /Driver:C:\Images\NetFX3-EN-US.cab /recurse
+
+DISM /Image:C:\mount /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:C:\sources\sxs
 
 
+DISM /Image:c:\mount /Get-Features /Format:Table
+
+
+C:\Images\NetFX3-EN-US.cab
 dism /image:C:\winre\mount /add-package /packagepath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-WMI_en-us.cab"
 xcopy C:\Windows\System32\WindowsPowerShell\v1.0\* C:\winre\mount\Windows\System32\WindowsPowerShell\v1.0 /s /e
 dism /Unmount-Wim /MountDir:C:\mount /Commit
