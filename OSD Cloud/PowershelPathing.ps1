@@ -1,4 +1,13 @@
-﻿#requires -Version 7.2
+﻿
+if ($PSVersionTable.PSVersion -gt [Version]"5.1") {
+  powershell -Version 7.4.5 -File $MyInvocation.MyCommand.Definition
+  exit
+}
+
+##This script requires version 7 of powershell in order to work, below is a install command for that.
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -Quiet"
+
+#requires -Version 7.2
 $ErrorActionPreference = 'Stop'
 
 function Get-ModulePathConfig {
