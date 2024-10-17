@@ -1,32 +1,44 @@
-﻿# Function to set default application
-function Set-DefaultApp {
+﻿# Function to set default application for a specific user
+function Set-DefaultAppForUser {
     param (
+        [string]$UserProfilePath,
         [string]$AppUserModelId,
         [string]$Extension
     )
 
-    # Set the default app for the specified extension
-    $appKeyPath = "HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\$Extension\UserChoice"
+    $appKeyPath = "$UserProfilePath\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\$Extension\UserChoice"
     New-Item -Path $appKeyPath -Force | Out-Null
     Set-ItemProperty -Path $appKeyPath -Name "ProgId" -Value $AppUserModelId
 }
 
 # Example applications - replace with your actual application identifiers
-$defaultApps = @{
-    ".txt" = "Applications.Notepad.exe"
-    ".jpg" = "Applications.Photos.exe"
-    ".pdf" = "Applications.AdobeAcrobat.exe"
+$defaultApps = @(
+    @{ Extension = ".txt"; AppUserModelId = "Applications.Notepad.exe" },
+    @{ Extension = ".jpg"; AppUserModelId = "Applications.Photos.exe" },
+    @{ Extension = ".pdf"; AppUserModelId = "Applications.AdobeAcrobat.exe" }
+    @{ Extension = ".pdx"; AppUserModelId = "Applications.AdobeAcrobat.exe" }
+)
+
+# Get all local user profiles excluding default and system accounts
+$localProfiles = Get-WmiObject Win32_UserProfile | Where-Object {
+    $_.LocalPath -and
+    $_.Special -eq $false -and
+    $_.LocalPath -notlike "*Default*" -and
+    $_.LocalPath -notlike "*Public*" -and
+    $_.LocalPath -notlike "*SID*" # Exclude SID accounts
 }
 
-# Loop through each file type and set the default application
-foreach ($extension in $defaultApps.Keys) {
-    $appId = $defaultApps[$extension]
-    Set-DefaultApp -AppUserModelId $appId -Extension $extension
+# Loop through each profile and set the default applications
+foreach ($profile in $localProfiles) {
+    $userProfilePath = $profile.LocalPath
+    foreach ($app in $defaultApps) {
+        Set-DefaultAppForUser -UserProfilePath $userProfilePath -AppUserModelId $app.AppUserModelId -Extension $app.Extension
+    }
 }
 
-# Set default browser (example)
+# Set default browser (example) for all local accounts
 $browserId = "Applications.Chrome.exe"
-Set-DefaultApp -AppUserModelId $browserId -Extension "http"
-
-# Notify user of completion
-Write-Host "Default applications set successfully."
+foreach ($profile in $localProfiles) {
+    $userProfilePath = $profile.LocalPath
+    Set-DefaultAppForUser -UserProfilePath $userProfilePath -AppUserModelId $browserId -Extension "http"
+}

@@ -1,49 +1,10 @@
-﻿choco install 
-# Ensure Chocolatey is installed
-if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-    Write-Output "Chocolatey is not installed. Installing Chocolatey..."
-    Set-ExecutionPolicy Bypass -Scope Process -Force
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-}
+﻿Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Define the list of applications to install
-## Need to include additional application support, as well as installer stubs for TL, Automate, Huntress and SentinelOne
-$applications = @(
-    "vlc",
-    "googlechrome",
-    "firefox",
-    "notepadplusplus",
-    "7zip",
-    "zoom",
-    "zoom-outlook",
-    "adobecreativecloud",
-    "microsoft-teams-new-bootstrapper",
-    "logioptionsplus",
-    "teamviewer",
-    "msvisualcplusplus2008-redist",
-    "msvisualcplusplus2010-redist",
-    "msvisualcplusplus2012-redist",
-    "vcredist140"
-)
+choco feature enable -n allowGlobalConfirmation
 
-# Install each application and capture the result
-$results =@{}
-foreach ($app in $applications) {
-    Write-Output "Installing $app..."
-    try {
-        # Capture the installation output
-        $output = choco install $app -y | Out-String
-        # Store the result in the hashtable
-        $results[$app] = $output
-    } catch {
-        $results[$app] = "Failed to install $app. Error: $_"
-    }
-}
+choco install teamviewer vlc googlechrome firefox notepadplusplus 7zip zoom zoom-outlook adobecreativecloud microsoft-teams-new-bootstrapper logioptionsplus teamviewer msvisualcplusplus2008-redist msvisualcplusplus2010-redist msvisualcplusplus2012-redist msvisualcplusplus2013-redist vcredist140 -y
 
-# Display the results
-Write-Output "Installation Results:"
-foreach ($app in $results.Keys) {
-    Write-Output "`n$app Installation Result:`n"
-    Write-Output $results[$app]
-}
+##choco uninstall vlc googlechrome firefox notepadplusplus 7zip zoom zoom-outlook microsoft-teams-new-bootstrapper logioptionsplus
+##choco uninstall vlc.install googlechrome.install firefox.install notepadplusplus.install 7zip.install zoom.install zoom-outlook.install microsoft-teams-new-bootstrapper.install logioptionsplus.install
