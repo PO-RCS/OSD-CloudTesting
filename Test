@@ -1,0 +1,31 @@
+reg load HKLM\PE-BUILD-SYSTEM "C:\Mount\Windows\System32\config\SYSTEM"
+reg load HKLM\PE-BUILD-SOFTWARE "C:\Mount\Windows\System32\config\SOFTWARE"
+set KEY=HKLM\PE-BUILD-SYSTEM\ControlSet001\Enum\Root\LEGACY_WLANSVC
+reg add %KEY% /v NextInstance /t REG_DWORD /d 1 /f
+reg add %KEY%\0000 /v Service /t REG_SZ /d Wlansvc /f
+reg add %KEY%\0000 /v Legacy /t REG_DWORD /d 1 /f
+reg add %KEY%\0000 /v ConfigFlags /t REG_DWORD /d 0 /f
+reg add %KEY%\0000 /v Class /t REG_SZ /d LegacyDriver /f
+reg add %KEY%\0000 /v ClassGUID /t REG_SZ /d {8ECC055D-047F-11D1-A537-0000F8753ED1} /f
+reg add %KEY%\0000 /v DeviceDesc /t REG_SZ /d "@%%SystemRoot%%\System32\wlansvc.dll,-257" /f
+set KEY=HKLM\PE-BUILD-SYSTEM\ControlSet001\services\wlansvc
+reg add %KEY% /v DisplayName /t REG_SZ /d "@%%SystemRoot%%\System32\wlansvc.dll,-257" /f
+reg add %KEY% /v ErrorControl /t REG_DWORD /d 1 /f
+reg add %KEY% /v Group /t REG_SZ /d TDI /f
+reg add %KEY% /v ImagePath /t REG_EXPAND_SZ /d "%%SystemRoot%%\system32\svchost.exe -k LocalSystemNetworkRestricted" /f
+reg add %KEY% /v Start /t REG_DWORD /d 2 /f
+reg add %KEY% /v Type /t REG_DWORD /d 32 /f
+reg add %KEY% /v Description /t REG_SZ /d "@%%SystemRoot%%\System32\wlansvc.dll,-258" /f
+reg add %KEY% /v DependOnService /t REG_MULTI_SZ /d "nativewifip\0RpcSs\0Ndisuio\0Eaphost" /f
+reg add %KEY% /v ObjectName /t REG_SZ /d LocalSystem /f
+reg add %KEY% /v ServiceSidType /t REG_DWORD /d 1 /f
+reg add %KEY% /v RequiredPrivileges /t REG_MULTI_SZ /d "SeChangeNotifyPrivilege\0SeImpersonatePrivilege\0SeAuditPrivilege\0SeTcbPrivilege\0SeDebugPrivilege" /f
+reg add %KEY% /v FailureActions /t REG_BINARY /d 2c0100000000000000000000030000001400000001000000c0d4010001000000e09304000000000000000000 /f
+reg add %KEY%\Enum /v 0 /t REG_SZ /d "Root\LEGACY_WLANSVC\0000" /f
+reg add %KEY%\Enum /v Count /t REG_DWORD /d 1 /f
+reg add %KEY%\Enum /v NextInstance /t REG_DWORD /d 1 /f
+reg add %KEY%\Parameters /v ServiceDll /t REG_EXPAND_SZ /d "%%SystemRoot%%\System32\wlansvc.dll" /f
+reg add %KEY%\Parameters /v ServiceDllUnloadOnStop /t REG_DWORD /d 1 /f
+reg add %KEY%\Parameters /v ServiceMain /t REG_SZ /d WlanSvcMain /f
+reg add HKLM\PE-BUILD-SOFTWARE\Microsoft\NetSh /v wlancfg /t REG_SZ /d wlancfg.dll /f
+call :REG_MULTI_SZ-add "HKLM\PE-BUILD-SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost" LocalSystemNetworkRestricted wlansvc
