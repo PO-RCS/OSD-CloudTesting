@@ -14,7 +14,7 @@ Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\RCS ZT\Media\Boot' | Where {$_.
 Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\RCS ZT\Media\EFI\Microsoft\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
 
 NEW-OSDCloudTemplate -Name 'RCS WinRE ZT' -WinRE
-Edit-OSDCloudWinPE -Wallpaper 'C:\Users\Administrator\Desktop\OSD-CloudTesting\OSD Cloud\Branding and Logos\RCSLogo.jpg' -StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Pro -OSActivation Retail" -Brand 'Rivercity OSD' -CloudDriver * -WirelessConnect -Add7Zip -WifiProfile "C:\WiFiProfiles\Wi-Fi-RCS-Build.xml" 
+Edit-OSDCloudWinPE -Wallpaper 'C:\Users\Administrator\Desktop\OSD-CloudTesting\OSD Cloud\Branding and Logos\RCSLogo.jpg' -StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Pro -OSActivation Retail -ZTI" -Brand 'Rivercity OSD' -CloudDriver * -Add7Zip -pwsh
 
 New-OSDCloudTemplate -Name 'Perfect Image'
 
