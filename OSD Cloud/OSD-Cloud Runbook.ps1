@@ -13,11 +13,14 @@ Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\RCS ZT\Media' | Where {$_.PSIsC
 Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\RCS ZT\Media\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
 Get-ChildItem 'C:\ProgramData\OSDCloud\Templates\RCS ZT\Media\EFI\Microsoft\Boot' | Where {$_.PSIsContainer} | Where {$_.Name -notin $KeepTheseDirs} | Remove-Item -Recurse -Force
 
-NEW-OSDCloudTemplate -Name 'RCS WinRE ZT' -WinRE
-Edit-OSDCloudWinPE -Wallpaper 'C:\Users\Administrator\Desktop\OSD-CloudTesting\OSD Cloud\Branding and Logos\RCSLogo.jpg' -StartOSDCloud "-OSName 'Windows 10 22H2 x64' -OSLanguage en-us -OSEdition Pro -OSActivation Retail -ZTI" -Brand 'Rivercity OSD' -CloudDriver * -Add7Zip -pwsh
 
-New-OSDCloudTemplate -Name 'Perfect Image'
+Edit-OSDCloudWinPE -Wallpaper 'C:\Users\Administrator\Desktop\OSD-CloudTesting\OSD Cloud\Branding and Logos\RCSLogo.jpg' -StartOSDCloud "-OSName 'Windows 10 24H2 x64' -OSLanguage en-us -OSEdition Pro -OSActivation Retail -ZTI" -Brand 'Rivercity OSD'  -DriverPath 'C:\Users\Administrator\Desktop\USB to RJ45 Drivers'
 
+
+Edit-OSDCloudWinPE -Wallpaper 'C:\Users\Administrator\Desktop\OSD-CloudTesting\OSD Cloud\Branding and Logos\RCSLogo.jpg' -StartOSDCloud "-OSName 'Windows 10 24H2 x64' -OSLanguage en-us -OSEdition Pro -OSActivation Retail -ZTI" -Brand 'Rivercity OSD' -CloudDriver Dell,HP,LenovoDock,USB,Wifi -DriverPath 'C:\Users\Administrator\Desktop\USB to RJ45 Drivers'
+
+
+Edit-OSDCloudWinPE -DriverPath 'C:\Users\Administrator\Desktop\USB to RJ45 Drivers'
 Set-OSDCloudWorkspace -WorkspacePath 'C:\ProgramData\OSDCloud\Templates\WinPE'
 Set-OSDCloudWorkspace -WorkspacePath 'C:\ProgramData\OSDCloud\Templates\RCS ZT'
 
@@ -29,34 +32,23 @@ Set-OSDCloudTemplate -Name 'RCS ZT'
 Get-WiFiActiveProfileSSID
 Get-WifiProfileKey RCS-Guest
 
-#Image location in WinPE D:\OSDCloud\OSD\CustomImage.wim
-
 Set-OSDCloudWorkspace -WorkspacePath C:\OSDCloud
 Edit-OSDCloudWinPE -WirelessConnect
-$(Get-OSDCloudWorkspace)\Media\OSDCloud\Automate
 
 Get-Module -ListAvailable
 Microsoft.Powershell.Archive,Microsoft.Powershell.Dianostics,Microsoft.Powershell.Host,Microsoft.Powershell.LocalAccounts,Microsoft.Powershell.Management,Microsoft.Powershell.ODataUtils,Microsoft.Powershell.Security,Microsoft.Powershell.Utility
 
 dism /mount-image /imagefile:C:\ProgramData\OSDCloud\Templates\WinPE\Media\sources\boot.wim /index:1 /mountdir:C:\mount
 copy /y C:\Windows\System32\Recovery\Winre.wim C:\mount
-
 copy /y C:\Windows\System32\dmcmnutils.dll C:\mount\Windows\System32
 copy /y C:\Windows\System32\mdmregistration.dll  C:\mount\Windows\System32
-
 Copy-Item -Path C:\Windows\System32\dmcmnutils.dll -Destination C:\mount\Windows\System32 -Force
 Copy-Item -Path C:\Windows\System32\mdmregistration.dll -Destination C:\mount\Windows\System32 -Force
-
-
-
 dism /Image:C:\Mount /Get-features
 dism /Get-Packages /Image:C:\mount
 DISM /Online /Image:"C:\mount" /Enable-Feature /FeatureName:NetFx3 /All 
 DISM /Image:C:\Mount\install.wim /Add-Driver /Driver:C:\Images\NetFX3-EN-US.cab /recurse
-
 DISM /Image:C:\mount /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:C:\sources\sxs
-
-
 DISM /Image:c:\mount /Get-Features /Format:Table
 
 
